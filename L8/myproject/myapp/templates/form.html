@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            margin:0;
+            padding:0;
+
+            /* ภาพพื้นหลัง */
+            background-image: url("https://picsum.photos/1600/900");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .container{
+            width:420px;
+            background: rgba(255,255,255,0.95);
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 0 20px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        .banner img{
+            width:100%;
+            border-radius:10px;
+            margin-bottom:15px;
+        }
+
+        h2{
+            margin-bottom:20px;
+        }
+
+        input{
+            width:90%;
+            padding:10px;
+            margin:8px 0;
+            border-radius:6px;
+            border:1px solid #ccc;
+            font-size:14px;
+        }
+
+        button{
+            width:95%;
+            padding:10px;
+            background:#007bff;
+            color:white;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+            font-size:15px;
+        }
+
+        button:hover{
+            background:#0056b3;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- รูปด้านบน -->
+    <div class="banner">
+        <img src="https://picsum.photos/600/200" alt="banner">
+    </div>
+
+    <h2>Contact Form</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="name" placeholder="Your Name">
+
+        <input type="email" name="email" placeholder="Your Email">
+
+        <input type="text" name="message" placeholder="Your Message">
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
