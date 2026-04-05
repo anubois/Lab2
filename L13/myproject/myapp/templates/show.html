@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>แสดงข้อมูล</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f5f7fa;
+        }
+        .card {
+            border-radius: 15px;
+        }
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+
+        <h2 class="text-center mb-4">📊 รายการข้อมูลนักศึกษา</h2>
+
+        <!-- 🔍 SEARCH -->
+        <form method="GET" class="mb-3 d-flex">
+            <input type="text" name="q" class="form-control me-2"
+                   placeholder="🔍 ค้นหาชื่อ..."
+                   value="{{ query }}">
+            
+            <button type="submit" class="btn btn-primary">ค้นหา</button>
+            <a href="/show/" class="btn btn-secondary ms-2">ล้าง</a>
+        </form>
+
+        {% if query %}
+            <p class="text-muted">ผลการค้นหา: "{{ query }}"</p>
+        {% endif %}
+
+        <!-- ➕ ปุ่มเพิ่ม -->
+        <div class="text-end mb-3">
+            <a href="/" class="btn btn-success">➕ เพิ่มข้อมูล</a>
+        </div>
+
+        <!-- 📊 TABLE -->
+        <table class="table table-hover table-striped text-center align-middle">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>ชื่อ</th>
+                    <th>รายละเอียด</th>
+                    <th>วันที่เพิ่ม</th>
+                    <th>จัดการ</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.detail }}</td>
+                    <td>{{ item.created_at }}</td>
+
+                    <td>
+                        <!-- ✏️ แก้ไข -->
+                        <a href="/edit/{{ item.id }}" 
+                           class="btn btn-warning btn-sm">
+                           ✏️
+                        </a>
+
+                        <!-- 🗑️ ลบ -->
+                        <a href="/delete/{{ item.id }}" 
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('ยืนยันการลบข้อมูลนี้?')">
+                           🗑️
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-muted">ไม่มีข้อมูล</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>
